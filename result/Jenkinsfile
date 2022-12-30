@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'node 8.9.0'
+    }
+
+    stages {
+        stage('build') {
+            steps {
+                echo 'Compiling worker app...'
+                dir('result') {
+                    sh 'npm install'
+                    sh 'npm ls'
+                }
+            }
+        }
+        
+        stage('test') {
+            steps {
+                echo 'Running Unit Tests on worker app...'
+                dir('result') {
+                    sh 'npm install'
+                    sh 'npm test'
+                }
+            }
+        }
+        
+    }
+    
+    post {
+        always {
+            echo 'Building multibranch pipeline for result is completed...'
+        }
+    }
+}

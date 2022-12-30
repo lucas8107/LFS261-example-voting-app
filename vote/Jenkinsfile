@@ -16,7 +16,9 @@ pipeline {
             steps {
                 echo 'Compiling vote app...'
                 dir('vote') {
-                    sh 'pip install -r requirements.txt -H'
+                    withEnv(["HOME=${env.WORKSPACE}"]) {
+                      sh "pip install -r requirements.txt --user"
+                    }
                 }
             }
         }
@@ -35,9 +37,11 @@ pipeline {
             steps {
                 echo 'Running Unit Tests on vote app...'
                 dir('vote') {
-                    sh 'pip install -r requirements.txt -H'
-                    sh 'ls'
-                    sh './integration_test.sh'
+                    withEnv(["HOME=${env.WORKSPACE}"]) {
+                        sh 'pip install -r requirements.txt -H'
+                        sh './integration_test.sh'
+                    }
+                    
                 }
             }
         }

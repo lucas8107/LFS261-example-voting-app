@@ -38,7 +38,7 @@ pipeline {
                 echo 'Running Unit Tests on vote app...'
                 dir('vote') {
                     withEnv(["HOME=${env.WORKSPACE}"]) {
-                        sh 'pip install -r requirements.txt -H'
+                        sh 'pip install -r requirements.txt --user'
                         sh './integration_test.sh'
                     }
                     

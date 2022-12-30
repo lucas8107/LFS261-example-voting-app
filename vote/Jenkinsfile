@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo 'Compiling vote app...'
                 dir('vote') {
-                    sh 'pip install -r requirements.txt --user'
+                    sh 'pip install -r requirements.txt -H'
                 }
             }
         }
@@ -35,7 +35,7 @@ pipeline {
             steps {
                 echo 'Running Unit Tests on vote app...'
                 dir('vote') {
-                    sh 'pip install -r requirements.txt --user'
+                    sh 'pip install -r requirements.txt -H'
                     sh 'ls'
                     sh './integration_test.sh'
                 }

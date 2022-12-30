@@ -36,7 +36,8 @@ pipeline {
                 echo 'Running Unit Tests on vote app...'
                 dir('vote') {
                     sh 'pip install -r requirements.txt'
-                    sh 'integration_test.sh'
+                    sh 'ls'
+                    sh './integration_test.sh'
                 }
             }
         }

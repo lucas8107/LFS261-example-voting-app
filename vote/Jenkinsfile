@@ -9,7 +9,7 @@ pipeline {
 
             agent {
                 docker {
-                    image 'eeganlf/voteapp-python:v0.1.0'
+                    image 'python:3.6'
                 }
             }
 
@@ -28,7 +28,7 @@ pipeline {
 
             agent {
                 docker {
-                    image 'eeganlf/voteapp-python:v0.1.0'
+                    image 'python:3.6'
                 }
             }
 

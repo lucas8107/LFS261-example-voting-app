@@ -19,6 +19,7 @@ class Worker {
         String voterID = voteData.getString("voter_id");
         String vote = voteData.getString("vote");
 
+        
         System.err.printf("Processing vote for '%s' by '%s'\n", vote, voterID);
         updateVote(dbConn, voterID, vote);
       }

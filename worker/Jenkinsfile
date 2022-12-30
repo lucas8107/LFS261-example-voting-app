@@ -53,11 +53,9 @@ pipeline {
             steps {
                 echo 'Packaging worker app with docker'
                 script {
-                    docker.withRegistry('https://registry-1.docker.io/v2/','dockerlogin') {
-                        def workerImage = docker.build("sixfold0981/worker:v${env.BUILD_ID}", "./worker")
-                        workerImage.push()
-                        workerImage.push("latest")
-                    }
+                    def workerImage = docker.build("sixfold0981/worker:v${env.BUILD_ID}", "./worker")
+                    workerImage.push()
+                    workerImage.push("latest")
                 }
             }
         }

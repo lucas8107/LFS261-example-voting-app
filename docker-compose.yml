@@ -8,6 +8,7 @@ networks:
 services:
   vote:
     image: sixfold0981/vote:latest
+    build: ./vote
     ports:
       - 5000:80
     depends_on:
@@ -28,6 +29,7 @@ services:
       - POSTGRES_HOST_AUTH_METHOD=trust
   result:
     image: sixfold0981/result:latest
+    build: ./result
     ports:
       - 5001:80
     depends_on:
@@ -36,6 +38,7 @@ services:
       - instavote
   worker:
     image: sixfold0981/result:latest
+    build: ./worker
     depends_on:
       - redis
       - db

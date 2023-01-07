@@ -1,0 +1,46 @@
+volumes:
+  db-data:
+
+networks:
+  instavote:
+    driver: bridge
+
+services:
+  vote:
+    image: sixfold0981/vote:latest
+    build: ./vote
+    ports:
+      - 5000:80
+    depends_on:
+      - redis
+    networks:
+      - instavote
+  redis:
+    image: redis:alpine
+    networks:
+      - instavote
+  db:
+    image: postgres:9.4
+    volumes:
+      - "db-data:/var/liv/postgresql/data"
+    networks:
+      - instavote
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+  result:
+    image: sixfold0981/result:latest
+    build: ./result
+    ports:
+      - 5001:80
+    depends_on:
+      - db
+    networks:
+      - instavote
+  worker:
+    image: sixfold0981/result:latest
+    build: ./worker
+    depends_on:
+      - redis
+      - db
+    networks:
+      - instavote
